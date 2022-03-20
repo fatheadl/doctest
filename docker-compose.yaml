@@ -1,0 +1,21 @@
+  influxdb:
+    image: influxdb:2.1
+    container_name: influxdb
+    environment:
+      - TZ=America/Jamaica
+      - INFLUXD_REPORTING_DISABLED=true
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_ADMIN_PASSWORD} # set in .env
+      - DOCKER_INFLUXDB_INIT_ORG=ensom
+      - DOCKER_INFLUXDB_INIT_BUCKET=solar
+
+    ports:
+      - 8086:8086
+    networks:
+      - localnet
+    volumes:
+      - /opt/influxdb2/data:/var/lib/influxdb2
+      - /opt/influxdb2/config/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+    restart:
+      unless-stopped
