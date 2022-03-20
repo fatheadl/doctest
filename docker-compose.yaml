@@ -1,3 +1,4 @@
+version: '3'
   influxdb:
     image: influxdb:2.1
     container_name: influxdb
