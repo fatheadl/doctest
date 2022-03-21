@@ -21,3 +21,5 @@ services:
       - /opt/influxdb2/config/influxdb.conf:/etc/influxdb/influxdb.conf:ro
     restart:
       unless-stopped
+    networks:
+      localnet:
