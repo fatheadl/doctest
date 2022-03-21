@@ -32,10 +32,10 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - /opt/appdata/grafana:/var/lib/grafana
-      - /opt/appdata/grafana/provisioning/:/etc/grafana/provisioning/
-      - /opt/appdata/grafana/grafana.ini:/etc/grafana/grafana.ini
-      - /opt/appdata/grafana/dashboards:/etc/grafana/dashboards
+      - /opt/grafana:/var/lib/grafana
+      - /opt/grafana/provisioning/:/etc/grafana/provisioning/
+      - /opt/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /opt/grafana/dashboards:/etc/grafana/dashboards
     restart:
       unless-stopped
     labels:
