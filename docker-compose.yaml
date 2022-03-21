@@ -38,6 +38,8 @@ services:
       - /opt/grafana/dashboards:/etc/grafana/dashboards
     restart:
       unless-stopped
+    networks:
+      - localnet      
     labels:
       - traefik.enable=true
       - traefik.http.services.grafana.loadbalancer.server.port=3000
