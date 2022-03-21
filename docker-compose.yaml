@@ -1,4 +1,5 @@
 version: "3.7"
+services:
   influxdb:
     image: influxdb:2.1
     container_name: influxdb
