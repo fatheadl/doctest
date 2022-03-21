@@ -47,6 +47,7 @@ services:
       - traefik.http.routers.grafana.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.grafana.tls.certresolver=le
+      - traefik.docker.network=localnet
       
   node-red:
  #   depends_on:
@@ -73,7 +74,8 @@ services:
       - traefik.http.routers.node-red.rule=Host(`nr.${PUBLIC_DOMAIN}`)
       - traefik.http.routers.node-red.entrypoints=websecure
 #      - traefik.http.routers.homeassistant.tls=true
-      - traefik.http.routers.node-red.tls.certresolver=le      
+      - traefik.http.routers.node-red.tls.certresolver=le
+      - traefik.docker.network=localnet      
       
       
       
