@@ -21,5 +21,59 @@ services:
       - /opt/influxdb2/config/influxdb.conf:/etc/influxdb/influxdb.conf:ro
     restart:
       unless-stopped
+      
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    environment:
+      - TZ=${TIMEZONE}
+      - GF_SERVER_DOMAIN=${PUBLIC_DOMAIN}
+    user: "0"
+    ports:
+      - 3000:3000
+    volumes:
+      - /opt/appdata/grafana:/var/lib/grafana
+      - /opt/appdata/grafana/provisioning/:/etc/grafana/provisioning/
+      - /opt/appdata/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - /opt/appdata/grafana/dashboards:/etc/grafana/dashboards
+    restart:
+      unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.grafana.loadbalancer.server.port=3000
+      - traefik.http.routers.grafana.rule=Host(`graf.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.grafana.entrypoints=websecure
+        #      - traefik.http.routers.homeassistant.tls=true
+      - traefik.http.routers.grafana.tls.certresolver=le
+      
+  node-red:
+    depends_on:
+ #      - broker
+    container_name: node-red
+    image: nodered/node-red
+    environment:
+    #      - SET_CONTAINER_TIMEZONE=true
+    #      - CONTAINER_TIMEZONE=${TIMEZONE}
+      - TZ=${TIMEZONE}
+    volumes:
+      - "/opt/node-red:/data"
+    user: "0"
+    restart: unless-stopped
+    network_mode: host
+#    networks:
+#      - localnet
+#    ports:
+#      - "1880:1880"
+
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.node-red.loadbalancer.server.port=1880
+      - traefik.http.routers.node-red.rule=Host(`nr.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.node-red.entrypoints=websecure
+#      - traefik.http.routers.homeassistant.tls=true
+      - traefik.http.routers.node-red.tls.certresolver=le      
+      
+      
+      
 networks:
   localnet:
