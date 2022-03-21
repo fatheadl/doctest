@@ -47,7 +47,7 @@ services:
       - traefik.http.routers.grafana.tls.certresolver=le
       
   node-red:
-    depends_on:
+ #   depends_on:
  #      - broker
     container_name: node-red
     image: nodered/node-red
