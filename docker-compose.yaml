@@ -80,5 +80,5 @@ services:
       
       
 networks:
-  fatheadl-net:
-    name: ubuntu_fatheadl-net
+  default:
+    name: ubuntu_default
