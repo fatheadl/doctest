@@ -80,6 +80,6 @@ services:
       
       
 networks:
-  fatheadl:
+  fatheadl-net:
     external: true
     
