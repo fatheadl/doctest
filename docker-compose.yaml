@@ -82,4 +82,4 @@ services:
 networks:
   fatheadl-net:
     external:
-      name: ubuntu-fatheadl-net
+      name: ubuntu_fatheadl-net
