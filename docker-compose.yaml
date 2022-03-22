@@ -14,8 +14,8 @@ services:
 
     ports:
       - 8086:8086
-    networks:
-      - fatheadl-net
+#    networks:
+#      - fatheadl-net
     volumes:
       - /opt/influxdb2/data:/var/lib/influxdb2
       - /opt/influxdb2/config/influxdb.conf:/etc/influxdb/influxdb.conf:ro
@@ -39,15 +39,15 @@ services:
     restart:
       unless-stopped
     networks:
-      - fatheadl-net      
-    labels:
+#      - fatheadl-net      
+#    labels:
       - traefik.enable=true
       - traefik.http.services.grafana.loadbalancer.server.port=3000
       - traefik.http.routers.grafana.rule=Host(`graf.${PUBLIC_DOMAIN}`)
       - traefik.http.routers.grafana.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.grafana.tls.certresolver=le
-      - traefik.docker.network=fatheadl-net
+#      - traefik.docker.network=fatheadl-net
       
   node-red:
  #   depends_on:
@@ -75,9 +75,11 @@ services:
       - traefik.http.routers.node-red.entrypoints=websecure
 #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.node-red.tls.certresolver=le
-      - traefik.docker.network=fatheadl-net     
+#      - traefik.docker.network=fatheadl-net     
       
       
       
 networks:
   fatheadl-net:
+    external:
+      name: ubuntu-fatheadl-net
