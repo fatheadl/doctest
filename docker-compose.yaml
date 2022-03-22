@@ -75,7 +75,7 @@ services:
       - traefik.http.routers.node-red.entrypoints=websecure
 #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.node-red.tls.certresolver=le
-      - traefik.docker.network=fatheadl-net    
+#      - traefik.docker.network=fatheadl-net    
       
       
       
