@@ -33,7 +33,7 @@ services:
       - 3000:3000
     volumes:
       - /opt/grafana:/var/lib/grafana
-#      - /opt/grafana/provisioning:/etc/grafana/provisioning
+      - /opt/grafana/provisioning:/etc/grafana/provisioning
       - /opt/grafana/grafana.ini:/etc/grafana/grafana.ini
       - /opt/grafana/dashboards:/etc/grafana/dashboards
     restart:
