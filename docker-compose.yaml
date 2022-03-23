@@ -23,7 +23,7 @@ services:
       unless-stopped
       
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:8.4.4
     container_name: grafana
     environment:
       - TZ=${TIMEZONE}
@@ -53,7 +53,7 @@ services:
  #   depends_on:
  #      - broker
     container_name: node-red
-    image: nodered/node-red
+    image: nodered/node-red:2.2.2
     environment:
     #      - SET_CONTAINER_TIMEZONE=true
     #      - CONTAINER_TIMEZONE=${TIMEZONE}
