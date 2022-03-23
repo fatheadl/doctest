@@ -170,7 +170,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.homebridges.loadbalancer.server.port=8581
-      - traefik.http.routers.homebridge.rule=Host(`hb.${PUBLIC_DOMAIN`)
+      - traefik.http.routers.homebridge.rule=Host(`hb.${PUBLIC_DOMAIN}`)
       - traefik.http.routers.homebridge.entrypoints=websecure
 #      - traefik.http.routers.hoobs.service=hoobs
       - traefik.http.routers.homebridge.tls.certresolver=le
