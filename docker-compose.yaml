@@ -182,7 +182,7 @@ services:
     environment:
       - USER_UID=1000
       - USER_GID=1000
-    restart: unless_stopped
+    restart: unless-stopped
     networks:
       - fatheadl-net
     volumes:
