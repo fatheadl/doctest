@@ -169,12 +169,37 @@ services:
     network_mode: host
     labels:
       - traefik.enable=true
-      - traefik.http.services.homebridges.loadbalancer.server.port=8581
+      - traefik.http.services.homebridge.loadbalancer.server.port=8581
       - traefik.http.routers.homebridge.rule=Host(`hb.${PUBLIC_DOMAIN}`)
       - traefik.http.routers.homebridge.entrypoints=websecure
 #      - traefik.http.routers.hoobs.service=hoobs
       - traefik.http.routers.homebridge.tls.certresolver=le
       - traefik.docker.network=fatheadl-net
+      
+  gitea:
+    image: gitea/gitea:1.16.6
+    container_name: gitea
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: unless_stopped
+    networks:
+      - fatheadl-net
+    volumes:
+      - /opt/gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.gitea.loadbalancer.server.port=3000
+      - traefik.http.routers.gitea.rule=Host(`gitea.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.gitea.entrypoints=websecure
+#      - traefik.http.routers.hoobs.service=hoobs
+      - traefik.http.routers.gitea.tls.certresolver=le
+      - traefik.docker.network=fatheadl-net      
       
       
       
