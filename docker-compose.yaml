@@ -80,7 +80,7 @@ services:
   zigbee2mqtt:
     container_name: zigbee2mqtt
     restart: unless-stopped
-    image: koenkk/zigbee2mqtt:1.25.0
+    image: koenkk/zigbee2mqtt:1.25.1
     volumes:
       - /opt/zigbee2mqtt-data:/app/data
       - /run/udev:/run/udev:ro
