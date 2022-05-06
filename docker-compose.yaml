@@ -151,7 +151,7 @@ services:
       - traefik.docker.network=fatheadl-net
       
   homebridge:
-    image: ghcr.io/oznu/homebridge:2022-04-03-ubuntu
+    image: ghcr.io/oznu/homebridge:2022-04-03-ubuntu@sha256:7966aad39fd8379b61cf75c4c58bee35c7a212f2988122c29f1c5a5302605c60
     container_name: homebridge
     environment:
       - TZ=${TIMEZONE}
