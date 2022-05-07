@@ -63,8 +63,8 @@ services:
     user: "0"
     restart: unless-stopped
     network_mode: host
-    networks:
-      - fatheadl-net
+#    networks:
+#      - fatheadl-net
 #    ports:
 #      - "1880:1880"
 
