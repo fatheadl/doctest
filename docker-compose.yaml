@@ -14,8 +14,8 @@ services:
 
     ports:
       - 8086:8086
-    networks:
-      - fatheadl-net
+#    networks:
+#      - fatheadl-net
     volumes:
       - /opt/influxdb2/data:/var/lib/influxdb2
       - /opt/influxdb2/config/influxdb.conf:/etc/influxdb/influxdb.conf:ro
@@ -38,8 +38,8 @@ services:
       - /opt/grafana/dashboards:/etc/grafana/dashboards
     restart:
       unless-stopped
-    networks:
-      - fatheadl-net      
+ #   networks:
+ #     - fatheadl-net      
     labels:
       - traefik.enable=true
       - traefik.http.services.grafana.loadbalancer.server.port=3000
@@ -86,8 +86,8 @@ services:
       - /run/udev:/run/udev:ro
     ports:
       - 8880:8080
-    networks:
-      - fatheadl-net
+ #   networks:
+ #     - fatheadl-net
     environment:
       - TZ=${TIMEZONE}
 #    devices:
@@ -111,8 +111,8 @@ services:
       - '/opt/mosquitto/log:/mosquitto/log'
       - '/opt/mosquitto/data:/mosquitto/data'
     restart: unless-stopped
-    networks:
-      - fatheadl-net
+ #   networks:
+ #     - fatheadl-net
     ports:
       - "1883:1883"
       - "9001:9001"
@@ -183,8 +183,8 @@ services:
       - USER_UID=1000
       - USER_GID=1000
     restart: unless-stopped
-    networks:
-      - fatheadl-net
+ #   networks:
+ #     - fatheadl-net
     volumes:
       - /opt/gitea:/data
       - /etc/timezone:/etc/timezone:ro
@@ -205,6 +205,6 @@ services:
       
 networks:
   default:
-    name: fatheadl-net
-    external: true
+    external:
+      name: fatheadl-net
     
