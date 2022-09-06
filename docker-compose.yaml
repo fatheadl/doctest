@@ -18,7 +18,7 @@ services:
 #      - fatheadl-net
     volumes:
       - /opt/influxdb2/data:/var/lib/influxdb2
-      - /opt/influxdb2/config/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+      - /opt/influxdb2/config:/etc/influxdb2:ro
     restart:
       unless-stopped
       
