@@ -205,6 +205,5 @@ services:
       
 networks:
   default:
-    external:
-      name: fatheadl-net
+    name: fatheadl-net
     
