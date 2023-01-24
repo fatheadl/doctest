@@ -212,13 +212,13 @@ services:
     volumes:
       - /opt/vw-data:/data
     labels:
-  - traefik.enable=true
-  - traefik.http.services.vaultwarden.loadbalancer.server.port=8080
-  - traefik.http.routers.vaultwarden.rule=Host(`vault.${PUBLIC_DOMAIN}`)
-  - traefik.http.routers.vaultwarden.entrypoints=websecure
-#      - traefik.http.routers.hoobs.service=hoobs
-  - traefik.http.routers.vaultwarden.tls.certresolver=le
-  - traefik.docker.network=fatheadl-net
+      - traefik.enable=true
+      - traefik.http.services.vaultwarden.loadbalancer.server.port=8080
+      - traefik.http.routers.vaultwarden.rule=Host(`vault.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.vaultwarden.entrypoints=websecure
+    #      - traefik.http.routers.hoobs.service=hoobs
+      - traefik.http.routers.vaultwarden.tls.certresolver=le
+      - traefik.docker.network=fatheadl-net
       
       
       
