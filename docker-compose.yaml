@@ -199,7 +199,26 @@ services:
       - traefik.http.routers.gitea.entrypoints=websecure
 #      - traefik.http.routers.hoobs.service=hoobs
       - traefik.http.routers.gitea.tls.certresolver=le
-      - traefik.docker.network=fatheadl-net      
+      - traefik.docker.network=fatheadl-net
+      
+  vaultwarden:
+    image: vaultwarden/server:1.27.0
+    container_name: vaultwarden
+    restart: always
+    environment:
+      WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
+    ports:
+      - "8080:8080"    
+    volumes:
+      - /opt/vw-data:/data
+    labels:
+  - traefik.enable=true
+  - traefik.http.services.vaultwarden.loadbalancer.server.port=8080
+  - traefik.http.routers.vaultwarden.rule=Host(`vault.${PUBLIC_DOMAIN}`)
+  - traefik.http.routers.vaultwarden.entrypoints=websecure
+#      - traefik.http.routers.hoobs.service=hoobs
+  - traefik.http.routers.vaultwarden.tls.certresolver=le
+  - traefik.docker.network=fatheadl-net
       
       
       
