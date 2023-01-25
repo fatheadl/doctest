@@ -208,7 +208,8 @@ services:
     environment:
       WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
     ports:
-      - "8080:80"    
+      - "8080:80"
+      - "3012:3012"
     volumes:
       - /opt/vw-data:/data
     labels:
