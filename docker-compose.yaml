@@ -219,6 +219,11 @@ services:
       - traefik.http.routers.vaultwarden.entrypoints=websecure
     #      - traefik.http.routers.hoobs.service=hoobs
       - traefik.http.routers.vaultwarden.tls.certresolver=le
+      - traefik.http.services.vaultwarden-watch.loadbalancer.server.port=3012
+      - traefik.http.routers.vaultwarden-watch.rule=Host(`vault.${PUBLIC_DOMAIN}`) && PathPrefix(`/notifications/hub`)
+      - traefik.http.routers.vaultwarden-watch.entrypoints=websecure
+    #      - traefik.http.routers.hoobs.service=hoobs
+      - traefik.http.routers.vaultwarden-watch.tls.certresolver=le      
       - traefik.docker.network=fatheadl-net
       
       
