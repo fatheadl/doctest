@@ -101,21 +101,32 @@ services:
       - traefik.http.routers.zigbee2mqtt.tls.certresolver=le
       - traefik.docker.network=fatheadl-net
       
-  broker:
-    container_name: mqtt
-    image: eclipse-mosquitto:2.0.15
+  emqx1:
+    image: emqx:5.0.14
+    container_name: emqx1
     environment:
-      - TZ=${TIMEZONE}
-    volumes:
-      - '/opt/mosquitto/config/mosquitto.conf:/mosquitto/config/mosquitto.conf'
-      - '/opt/mosquitto/log:/mosquitto/log'
-      - '/opt/mosquitto/data:/mosquitto/data'
-    restart: unless-stopped
- #   networks:
- #     - fatheadl-net
+    - TZ=${TIMEZONE}
+    healthcheck:
+      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+      interval: 5s
+      timeout: 25s
+      retries: 5
+    #networks:
+
     ports:
-      - "1883:1883"
-      - "9001:9001"
+      - 1883:1883
+      - 8083:8083
+      - 8084:8084
+      - 8883:8883
+      - 18083:18083
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.emqx1.loadbalancer.server.port=18083
+      - traefik.http.routers.emqx1.rule=Host(`z2m.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.emqx1.entrypoints=websecure
+#      - traefik.http.routers.homeassistant.tls=true
+      - traefik.http.routers.emqx1.tls.certresolver=le
+      - traefik.docker.network=fatheadl-net      
       
   homeassistant:
     container_name: homeassistant
