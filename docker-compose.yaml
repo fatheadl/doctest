@@ -112,6 +112,7 @@ services:
       timeout: 25s
       retries: 5
     #networks:
+    user: 0
     volumes:
       - /opt/emqx/data:/opt/emqx/data
       - /opt/emqx/log:/opt/emqx/log
