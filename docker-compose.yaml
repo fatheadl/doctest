@@ -114,6 +114,7 @@ services:
     #networks:
     volumes:
       - /opt/emqx/data:/opt/emqx/data
+      - /opt/emqx/log:/opt/emqx/log
 
     ports:
       - 1883:1883
