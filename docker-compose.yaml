@@ -112,6 +112,8 @@ services:
       timeout: 25s
       retries: 5
     #networks:
+    volumes:
+      - /opt/emqx/data:/opt/emqx/data
 
     ports:
       - 1883:1883
