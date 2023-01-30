@@ -102,7 +102,7 @@ services:
       - traefik.docker.network=fatheadl-net
       
   emqx1:
-    image: emqx:5.0.14
+    image: emqx:5.0.15
     container_name: emqx1
     environment:
     - TZ=${TIMEZONE}
