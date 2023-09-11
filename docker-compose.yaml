@@ -247,6 +247,6 @@ services:
       
       
 networks:
-  default:
-    name: fatheadl-net
+  ubuntu_fatheadl-net:
+    external: true
     
