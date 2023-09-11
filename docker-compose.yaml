@@ -28,7 +28,7 @@ services:
       - traefik.http.routers.influxdb.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.influxdb.tls.certresolver=le
-      - traefik.docker.network=ubuntu_fatheadl-net:
+      - traefik.docker.network=ubuntu_fatheadl-net
       - traefik.http.middlewares.influxdb=crowdsec-bouncer@file      
       
   grafana:
@@ -56,7 +56,7 @@ services:
       - traefik.http.routers.grafana.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.grafana.tls.certresolver=le
-      - traefik.docker.network=ubuntu_fatheadl-net:
+      - traefik.docker.network=ubuntu_fatheadl-net
       - traefik.http.middlewares.grafana=crowdsec-bouncer@file
       
       
@@ -86,7 +86,7 @@ services:
       - traefik.http.routers.node-red.entrypoints=websecure
 #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.node-red.tls.certresolver=le
-      - traefik.docker.network=ubuntu_fatheadl-net:
+      - traefik.docker.network=ubuntu_fatheadl-net
       - traefik.http.middlewares.node-red=crowdsec-bouncer@file
       
 #  zigbee2mqtt:
@@ -229,7 +229,7 @@ services:
       - traefik.http.routers.gitea.entrypoints=websecure
 #      - traefik.http.routers.hoobs.service=hoobs
       - traefik.http.routers.gitea.tls.certresolver=le
-      - traefik.docker.network=ubuntu_fatheadl-net:
+      - traefik.docker.network=ubuntu_fatheadl-net
       - traefik.http.middlewares.gitea=crowdsec-bouncer@file
       
   vaultwarden:
@@ -256,7 +256,7 @@ services:
       - traefik.http.routers.vaultwarden-watch.entrypoints=websecure
       - traefik.http.routers.vaultwarden-watch.tls.certresolver=le
       - traefik.http.routers.vaultwarden-watch.service=vaultwarden-watch
-      - traefik.docker.network=ubuntu_fatheadl-net:
+      - traefik.docker.network=ubuntu_fatheadl-net
       - traefik.http.middlewares.vaultwarden-watch=crowdsec-bouncer@file
       
       
