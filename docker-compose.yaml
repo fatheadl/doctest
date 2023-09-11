@@ -21,6 +21,15 @@ services:
       - /opt/influxdb2/config:/etc/influxdb2:ro
     restart:
       unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.services.influxdb.loadbalancer.server.port=3000
+      - traefik.http.routers.influxdb.rule=Host(`graf.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.influxdb.entrypoints=websecure
+        #      - traefik.http.routers.homeassistant.tls=true
+      - traefik.http.routers.influxdb.tls.certresolver=le
+      - traefik.docker.network=fatheadl-net
+      - traefik.http.middlewares.influxdb=crowdsec-bouncer@file      
       
   grafana:
     image: grafana/grafana:10.1.1
@@ -48,6 +57,8 @@ services:
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.grafana.tls.certresolver=le
       - traefik.docker.network=fatheadl-net
+      - traefik.http.middlewares.grafana=crowdsec-bouncer@file
+      
       
   node-red:
  #   depends_on:
@@ -76,6 +87,7 @@ services:
 #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.node-red.tls.certresolver=le
       - traefik.docker.network=fatheadl-net
+      - traefik.http.middlewares.node-red=crowdsec-bouncer@file
       
 #  zigbee2mqtt:
 #    container_name: zigbee2mqtt
@@ -218,6 +230,7 @@ services:
 #      - traefik.http.routers.hoobs.service=hoobs
       - traefik.http.routers.gitea.tls.certresolver=le
       - traefik.docker.network=fatheadl-net
+      - traefik.http.middlewares.gitea=crowdsec-bouncer@file
       
   vaultwarden:
     image: vaultwarden/server:1.29.2
@@ -237,12 +250,14 @@ services:
       - traefik.http.routers.vaultwarden.entrypoints=websecure
       - traefik.http.routers.vaultwarden.service=vaultwarden
       - traefik.http.routers.vaultwarden.tls.certresolver=le
+      - traefik.http.middlewares.vaultwarden=crowdsec-bouncer@file
       - traefik.http.services.vaultwarden-watch.loadbalancer.server.port=3012
       - traefik.http.routers.vaultwarden-watch.rule=Host(`vault.${PUBLIC_DOMAIN}`) && Path(`/notifications/hub`)
       - traefik.http.routers.vaultwarden-watch.entrypoints=websecure
       - traefik.http.routers.vaultwarden-watch.tls.certresolver=le
       - traefik.http.routers.vaultwarden-watch.service=vaultwarden-watch
       - traefik.docker.network=fatheadl-net
+      - traefik.http.middlewares.vaultwarden-watch=crowdsec-bouncer@file
       
       
       
