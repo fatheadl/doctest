@@ -77,29 +77,29 @@ services:
       - traefik.http.routers.node-red.tls.certresolver=le
       - traefik.docker.network=fatheadl-net
       
-  zigbee2mqtt:
-    container_name: zigbee2mqtt
-    restart: unless-stopped
-    image: koenkk/zigbee2mqtt:1.33.0
-    volumes:
-      - /opt/zigbee2mqtt-data:/app/data
-      - /run/udev:/run/udev:ro
-    ports:
-      - 8880:8080
- #   networks:
- #     - fatheadl-net
-    environment:
-      - TZ=${TIMEZONE}
+#  zigbee2mqtt:
+#    container_name: zigbee2mqtt
+#    restart: unless-stopped
+#    image: koenkk/zigbee2mqtt:1.33.0
+#    volumes:
+#      - /opt/zigbee2mqtt-data:/app/data
+#      - /run/udev:/run/udev:ro
+#    ports:
+#      - 8880:8080
+#   networks:
+#     - fatheadl-net
+#    environment:
+#      - TZ=${TIMEZONE}
 #    devices:
 #      - /dev/serial/by-id/usb-ITead_Sonoff_Zigbee_3.0_USB_Dongle_Plus_32671b6053c8eb11a8f8c5c3de5b81b4-if00-port0:/dev/ttyUSB0
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.zigbee2mqtt.loadbalancer.server.port=8080
-      - traefik.http.routers.zigbee2mqtt.rule=Host(`z2m.${PUBLIC_DOMAIN}`)
-      - traefik.http.routers.zigbee2mqtt.entrypoints=websecure
+#    labels:
+#      - traefik.enable=true
+#      - traefik.http.services.zigbee2mqtt.loadbalancer.server.port=8080
+#      - traefik.http.routers.zigbee2mqtt.rule=Host(`z2m.${PUBLIC_DOMAIN}`)
+#      - traefik.http.routers.zigbee2mqtt.entrypoints=websecure
 #      - traefik.http.routers.homeassistant.tls=true
-      - traefik.http.routers.zigbee2mqtt.tls.certresolver=le
-      - traefik.docker.network=fatheadl-net
+#      - traefik.http.routers.zigbee2mqtt.tls.certresolver=le
+#      - traefik.docker.network=fatheadl-net
       
 #  emqx1:
 #    image: emqx:5.1.6
@@ -135,65 +135,65 @@ services:
 #      - traefik.http.routers.emqx1.tls.certresolver=le
 #      - traefik.docker.network=fatheadl-net      
       
-  homeassistant:
-    container_name: homeassistant
-    #    image: homeassistant/raspberrypi4-homeassistant:stable
-    image: homeassistant/home-assistant:2023.9.1
-    environment:
-      - TZ=${TIMEZONE}
+#  homeassistant:
+#    container_name: homeassistant
+#    #    image: homeassistant/raspberrypi4-homeassistant:stable
+#    image: homeassistant/home-assistant:2023.9.1
+#    environment:
+#      - TZ=${TIMEZONE}
 #    networks:
 #      - fatheadl-net
-    network_mode: host
+#    network_mode: host
 #    ports:
 #      - "8123:8123"
-    volumes:
-      - /opt/homeassistant:/config
+#    volumes:
+#      - /opt/homeassistant:/config
 #      - /etc/localtime:/etc/localtime:ro
 #      - /etc/letsencrypt:/etc/letsencrypt:ro
 #    devices:
             #      - /dev/ttyACM0:/dev/ttyACM0:rwm
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://127.0.0.1:8123"]
-      interval: 30s
-      timeout: 10s
-      retries: 6
+#    restart: unless-stopped
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://127.0.0.1:8123"]
+#      interval: 30s
+#      timeout: 10s
+#      retries: 6
 
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.homeassistant.loadbalancer.server.port=8123
-      - traefik.http.routers.homeassistant.rule=Host(`ha.${PUBLIC_DOMAIN}`)
-      - traefik.http.routers.homeassistant.entrypoints=websecure
+#    labels:
+#      - traefik.enable=true
+#      - traefik.http.services.homeassistant.loadbalancer.server.port=8123
+#      - traefik.http.routers.homeassistant.rule=Host(`ha.${PUBLIC_DOMAIN}`)
+#      - traefik.http.routers.homeassistant.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
-      - traefik.http.routers.homeassistant.tls.certresolver=le
-      - traefik.docker.network=fatheadl-net
-      
-  homebridge:
-    image: ghcr.io/oznu/homebridge:ubuntu
-    container_name: homebridge
-    environment:
-      - TZ=${TIMEZONE}
-      - PGID=1000
-      - PUID=1000
-      - HOMEBRIDGE_CONFIG_UI=1
-      - HOMEBRIDGE_CONFIG_UI_PORT=8581
-    volumes:
-      - /opt/homebridge:/homebridge
+#      - traefik.http.routers.homeassistant.tls.certresolver=le
+#      - traefik.docker.network=fatheadl-net
+#      
+#  homebridge:
+#    image: ghcr.io/oznu/homebridge:ubuntu
+#    container_name: homebridge
+#    environment:
+#      - TZ=${TIMEZONE}
+#      - PGID=1000
+#      - PUID=1000
+#      - HOMEBRIDGE_CONFIG_UI=1
+#      - HOMEBRIDGE_CONFIG_UI_PORT=8581
+#    volumes:
+#      - /opt/homebridge:/homebridge
 #    ports:
 #      - 8080:8080
 #      - 8181:8181
 #      - 51826:51826
-    restart: unless-stopped
-    network_mode: host
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.homebridge.loadbalancer.server.port=8581
-      - traefik.http.routers.homebridge.rule=Host(`hb.${PUBLIC_DOMAIN}`)
-      - traefik.http.routers.homebridge.entrypoints=websecure
+#    restart: unless-stopped
+#    network_mode: host
+#    labels:
+#      - traefik.enable=true
+#      - traefik.http.services.homebridge.loadbalancer.server.port=8581
+#      - traefik.http.routers.homebridge.rule=Host(`hb.${PUBLIC_DOMAIN}`)
+#      - traefik.http.routers.homebridge.entrypoints=websecure
 #      - traefik.http.routers.hoobs.service=hoobs
-      - traefik.http.routers.homebridge.tls.certresolver=le
-      - traefik.docker.network=fatheadl-net
-      
+#      - traefik.http.routers.homebridge.tls.certresolver=le
+#      - traefik.docker.network=fatheadl-net
+#      
   gitea:
     image: gitea/gitea:1.20.4
     container_name: gitea
