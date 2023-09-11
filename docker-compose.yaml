@@ -101,39 +101,39 @@ services:
       - traefik.http.routers.zigbee2mqtt.tls.certresolver=le
       - traefik.docker.network=fatheadl-net
       
-  emqx1:
-    image: emqx:5.1.6
-    container_name: emqx1
-    environment:
-    - TZ=${TIMEZONE}
-    healthcheck:
-      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
-      interval: 5s
-      timeout: 25s
-      retries: 5
+#  emqx1:
+#    image: emqx:5.1.6
+#    container_name: emqx1
+ #   environment:
+ #   - TZ=${TIMEZONE}
+#    healthcheck:
+#      test: ["CMD", "/opt/emqx/bin/emqx_ctl", "status"]
+#      interval: 5s
+#      timeout: 25s
+#      retries: 5
     #networks:
-    user: "0"
-    volumes:
-      - /opt/emqx/data:/opt/emqx/data
-      - /opt/emqx/log:/opt/emqx/log
-      #- /opt/emqx/etc:/opt/emqx/etc
-    restart:
-      unless-stopped    
+#    user: "0"
+#    volumes:
+#      - /opt/emqx/data:/opt/emqx/data
+#      - /opt/emqx/log:/opt/emqx/log
+#     #- /opt/emqx/etc:/opt/emqx/etc
+#    restart:
+#      unless-stopped    
 
-    ports:
-      - 1883:1883
-      - 8083:8083
-      - 8084:8084
-      - 8883:8883
-      - 18083:18083
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.emqx1.loadbalancer.server.port=18083
-      - traefik.http.routers.emqx1.rule=Host(`emqx.${PUBLIC_DOMAIN}`)
-      - traefik.http.routers.emqx1.entrypoints=websecure
+#    ports:
+#      - 1883:1883
+#      - 8083:8083
+#      - 8084:8084
+#     - 8883:8883
+#      - 18083:18083
+#    labels:
+#      - traefik.enable=true
+#      - traefik.http.services.emqx1.loadbalancer.server.port=18083
+#      - traefik.http.routers.emqx1.rule=Host(`emqx.${PUBLIC_DOMAIN}`)
+#      - traefik.http.routers.emqx1.entrypoints=websecure
 #      - traefik.http.routers.homeassistant.tls=true
-      - traefik.http.routers.emqx1.tls.certresolver=le
-      - traefik.docker.network=fatheadl-net      
+#      - traefik.http.routers.emqx1.tls.certresolver=le
+#      - traefik.docker.network=fatheadl-net      
       
   homeassistant:
     container_name: homeassistant
