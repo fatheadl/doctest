@@ -14,8 +14,8 @@ services:
 
     ports:
       - 8086:8086
-#    networks:
-#      - fatheadl-net
+    networks:
+      - ubuntu_fatheadl-net
     volumes:
       - /opt/influxdb2/data:/var/lib/influxdb2
       - /opt/influxdb2/config:/etc/influxdb2:ro
@@ -47,8 +47,8 @@ services:
       - /opt/grafana/dashboards:/etc/grafana/dashboards
     restart:
       unless-stopped
- #   networks:
- #     - fatheadl-net      
+    networks:
+      - ubuntu_fatheadl-net  
     labels:
       - traefik.enable=true
       - traefik.http.services.grafana.loadbalancer.server.port=3000
@@ -74,10 +74,10 @@ services:
     user: "0"
     restart: unless-stopped
     network_mode: host
-#    networks:
-#      - fatheadl-net
-#    ports:
-#      - "1880:1880"
+    networks:
+      - ubuntu_fatheadl-net
+    ports:
+      - "1880:1880"
 
     labels:
       - traefik.enable=true
@@ -213,8 +213,8 @@ services:
       - USER_UID=1000
       - USER_GID=1000
     restart: unless-stopped
- #   networks:
- #     - fatheadl-net
+    networks:
+      - ubuntu_fatheadl-net
     volumes:
       - /opt/gitea:/data
       - /etc/timezone:/etc/timezone:ro
@@ -241,6 +241,8 @@ services:
     ports:
       - "8080:80"
       - "3012:3012"
+    networks:
+      - ubuntu_fatheadl-net      
     volumes:
       - /opt/vw-data:/data
     labels:
