@@ -23,8 +23,8 @@ services:
       unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.services.influxdb.loadbalancer.server.port=3000
-      - traefik.http.routers.influxdb.rule=Host(`graf.${PUBLIC_DOMAIN}`)
+      - traefik.http.services.influxdb.loadbalancer.server.port=8086
+      - traefik.http.routers.influxdb.rule=Host(`in.${PUBLIC_DOMAIN}`)
       - traefik.http.routers.influxdb.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.influxdb.tls.certresolver=le
