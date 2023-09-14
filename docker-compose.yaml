@@ -29,7 +29,6 @@ services:
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.influxdb.tls.certresolver=le
       - traefik.docker.network=ubuntu_fatheadl-net
-      - traefik.http.middlewares.influxdb=crowdsec-bouncer@file      
       
   grafana:
     image: grafana/grafana:10.1.1
@@ -57,37 +56,35 @@ services:
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.grafana.tls.certresolver=le
       - traefik.docker.network=ubuntu_fatheadl-net
-      - traefik.http.middlewares.grafana=crowdsec-bouncer@file
       
       
-  node-red:
+#  node-red:
  #   depends_on:
  #      - broker
-    container_name: node-red
-    image: nodered/node-red:3.1.0
-    environment:
+#    container_name: node-red
+#    image: nodered/node-red:3.1.0
+#    environment:
     #      - SET_CONTAINER_TIMEZONE=true
     #      - CONTAINER_TIMEZONE=${TIMEZONE}
       - TZ=${TIMEZONE}
-    volumes:
-      - "/opt/node-red:/data"
-    user: "0"
-    restart: unless-stopped
-    network_mode: host
+#    volumes:
+#      - "/opt/node-red:/data"
+#    user: "0"
+#    restart: unless-stopped
+#    network_mode: host
 #    networks:
 #      - ubuntu_fatheadl-net
-    ports:
-      - "1880:1880"
+#    ports:
+#      - "1880:1880"
 
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.node-red.loadbalancer.server.port=1880
-      - traefik.http.routers.node-red.rule=Host(`nr.${PUBLIC_DOMAIN}`)
-      - traefik.http.routers.node-red.entrypoints=websecure
+#    labels:
+#      - traefik.enable=true
+#      - traefik.http.services.node-red.loadbalancer.server.port=1880
+#      - traefik.http.routers.node-red.rule=Host(`nr.${PUBLIC_DOMAIN}`)
+#      - traefik.http.routers.node-red.entrypoints=websecure
 #      - traefik.http.routers.homeassistant.tls=true
-      - traefik.http.routers.node-red.tls.certresolver=le
-      - traefik.docker.network=ubuntu_fatheadl-net
-      - traefik.http.middlewares.node-red=crowdsec-bouncer@file
+#      - traefik.http.routers.node-red.tls.certresolver=le
+#      - traefik.docker.network=ubuntu_fatheadl-net
       
 #  zigbee2mqtt:
 #    container_name: zigbee2mqtt
@@ -230,7 +227,6 @@ services:
 #      - traefik.http.routers.hoobs.service=hoobs
       - traefik.http.routers.gitea.tls.certresolver=le
       - traefik.docker.network=ubuntu_fatheadl-net
-      - traefik.http.middlewares.gitea=crowdsec-bouncer@file
       
   vaultwarden:
     image: vaultwarden/server:1.29.2
@@ -252,14 +248,12 @@ services:
       - traefik.http.routers.vaultwarden.entrypoints=websecure
       - traefik.http.routers.vaultwarden.service=vaultwarden
       - traefik.http.routers.vaultwarden.tls.certresolver=le
-      - traefik.http.middlewares.vaultwarden=crowdsec-bouncer@file
       - traefik.http.services.vaultwarden-watch.loadbalancer.server.port=3012
       - traefik.http.routers.vaultwarden-watch.rule=Host(`vault.${PUBLIC_DOMAIN}`) && Path(`/notifications/hub`)
       - traefik.http.routers.vaultwarden-watch.entrypoints=websecure
       - traefik.http.routers.vaultwarden-watch.tls.certresolver=le
       - traefik.http.routers.vaultwarden-watch.service=vaultwarden-watch
       - traefik.docker.network=ubuntu_fatheadl-net
-      - traefik.http.middlewares.vaultwarden-watch=crowdsec-bouncer@file
       
       
       
