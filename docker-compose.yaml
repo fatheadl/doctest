@@ -31,7 +31,7 @@ services:
       - traefik.docker.network=ubuntu_fatheadl-net
       
   grafana:
-    image: grafana/grafana:10.1.4
+    image: grafana/grafana:10.1.5
     container_name: grafana
     environment:
       - TZ=${TIMEZONE}
