@@ -44,7 +44,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.headscale.loadbalancer.server.port=8080
-      - traefik.http.routers.headscale.rule=Host(`headscale.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.headscale.rule=Host(`headscale.${PUBLIC_DOMAIN}`) && PathPrefix(`/`)
       - traefik.http.routers.headscale.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale.tls.certresolver=le
@@ -60,7 +60,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.headscale-ui.loadbalancer.server.port=80
-      - traefik.http.routers.headscale-ui.rule=Host(`headscale-ui.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.headscale-ui.rule=Host(`headscale-ui.${PUBLIC_DOMAIN}`) && PathPrefix(`/web`)
       - traefik.http.routers.headscale-ui.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale-ui.tls.certresolver=le
