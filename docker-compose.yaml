@@ -35,6 +35,8 @@ services:
     volumes:
         - /opt/headscale/config:/etc/headscale/
         - /opt/headscale/keys:/var/lib/headscale/
+    environment:
+      - TZ=America/Jamaica        
     ports:
         - 8081:8080
         - 9090:9090
@@ -46,7 +48,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.headscale.loadbalancer.server.port=8080
-      - traefik.http.routers.headscale.rule=Host(`headscale.${PUBLIC_DOMAIN}`) && PathPrefix(`/`)
+      - traefik.http.routers.headscale.rule=Host(`hs.${PUBLIC_DOMAIN}`) && PathPrefix(`/`)
       - traefik.http.routers.headscale.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale.tls.certresolver=le
@@ -57,6 +59,8 @@ services:
     pull_policy: always
     container_name: headscale-ui
     restart: unless-stopped
+    environment:
+      - TZ=America/Jamaica    
     ports:
         - 9999:80
     networks:
@@ -64,7 +68,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.headscale-ui.loadbalancer.server.port=80
-      - traefik.http.routers.headscale-ui.rule=Host(`headscale-ui.${PUBLIC_DOMAIN}`) && PathPrefix(`/web`)
+      - traefik.http.routers.headscale-ui.rule=Host(`hs-ui.${PUBLIC_DOMAIN}`) && PathPrefix(`/web`)
       - traefik.http.routers.headscale-ui.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale-ui.tls.certresolver=le
