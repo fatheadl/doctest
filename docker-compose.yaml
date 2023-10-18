@@ -41,6 +41,8 @@ services:
     image: headscale/headscale:latest
     command: headscale serve
     restart: unless-stopped
+    networks:
+      - ubuntu_fatheadl-net    
     labels:
       - traefik.enable=true
       - traefik.http.services.headscale.loadbalancer.server.port=8080
@@ -56,7 +58,9 @@ services:
     container_name: headscale-ui
     restart: unless-stopped
     ports:
-        - 9999:80 
+        - 9999:80
+    networks:
+      - ubuntu_fatheadl-net        
     labels:
       - traefik.enable=true
       - traefik.http.services.headscale-ui.loadbalancer.server.port=80
