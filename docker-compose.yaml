@@ -36,7 +36,7 @@ services:
         - /opt/headscale/config:/etc/headscale/
         - /opt/headscale/keys:/var/lib/headscale/
     ports:
-        - 8080:8080
+        - 8081:8080
         - 9090:9090
     image: headscale/headscale:latest
     command: headscale serve
