@@ -50,6 +50,10 @@ services:
       - traefik.http.services.headscale.loadbalancer.server.port=8080
       - traefik.http.routers.headscale.rule=Host(`hs.${PUBLIC_DOMAIN}`) && PathPrefix(`/`)
       - traefik.http.routers.headscale.entrypoints=websecure
+      - "traefik.http.middlewares.headscale.headers.accesscontrolallowmethods=GET,OPTIONS,PUT"
+      - "traefik.http.middlewares.headscale.headers.accesscontrolalloworiginlist=https://hs-ui.doctest.duckdns.org"
+      - "traefik.http.middlewares.headscale.headers.accesscontrolmaxage=100"
+      - "traefik.http.middlewares.headscale.headers.addvaryheader=true"
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale.tls.certresolver=le
       - traefik.docker.network=ubuntu_fatheadl-net    
