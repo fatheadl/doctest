@@ -72,10 +72,10 @@ services:
       - traefik.http.routers.headscale-ui.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale-ui.tls.certresolver=le
-      - traefik.http.middlewares.headscale-ui.headers.accesscontrolallowmethods=GET,OPTIONS,PUT
-      - traefik.http.middlewares.headscale-ui.headers.accesscontrolalloworigin=origin-list-or-null
-      - traefik.http.middlewares.headscale-ui.headers.accesscontrolmaxage=100
-      - traefik.http.middlewares.headscale-ui.headers.addvaryheader=true
+      #- traefik.http.middlewares.headscale-ui.headers.accesscontrolallowmethods=GET,OPTIONS,PUT
+      #- traefik.http.middlewares.headscale-ui.headers.accesscontrolalloworigin=origin-list-or-null
+      #- traefik.http.middlewares.headscale-ui.headers.accesscontrolmaxage=100
+      #- traefik.http.middlewares.headscale-ui.headers.addvaryheader=true
       - traefik.docker.network=ubuntu_fatheadl-net        
       
   grafana:
