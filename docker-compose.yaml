@@ -50,11 +50,11 @@ services:
       - traefik.http.services.headscale.loadbalancer.server.port=8080
       - traefik.http.routers.headscale.rule=Host(`hs.${PUBLIC_DOMAIN}`) && PathPrefix(`/`)
       - traefik.http.routers.headscale.entrypoints=websecure
-      - "traefik.http.middlewares.headscale.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE"
-      - "traefik.http.middlewares.headscale.headers.accesscontrolalloworiginlist=https://hs-ui.${PUBLIC_DOMAIN}"
-      - "traefik.http.middlewares.headscale.headers.accesscontrolmaxage=100"
-      - "traefik.http.middlewares.headscale.headers.addvaryheader=true"
-        #      - traefik.http.routers.homeassistant.tls=true
+      #- "traefik.http.middlewares.headscale.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE"
+      #- "traefik.http.middlewares.headscale.headers.accesscontrolalloworiginlist=https://hs-ui.${PUBLIC_DOMAIN}"
+      #- "traefik.http.middlewares.headscale.headers.accesscontrolmaxage=100"
+      #- "traefik.http.middlewares.headscale.headers.addvaryheader=true"
+      #- traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale.tls.certresolver=le
       - traefik.docker.network=ubuntu_fatheadl-net    
 
@@ -72,7 +72,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.services.headscale-ui.loadbalancer.server.port=80
-      - traefik.http.routers.headscale-ui.rule=Host(`hs-ui.${PUBLIC_DOMAIN}`) && PathPrefix(`/web`)
+      - traefik.http.routers.headscale-ui.rule=Host(`hs.${PUBLIC_DOMAIN}`) && PathPrefix(`/web`)
       - traefik.http.routers.headscale-ui.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale-ui.tls.certresolver=le
