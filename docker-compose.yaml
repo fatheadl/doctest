@@ -51,7 +51,7 @@ services:
       - traefik.http.routers.headscale.rule=Host(`hs.${PUBLIC_DOMAIN}`) && PathPrefix(`/`)
       - traefik.http.routers.headscale.entrypoints=websecure
       - "traefik.http.middlewares.headscale.headers.accesscontrolallowmethods=GET,OPTIONS,PUT,POST,DELETE"
-      - "traefik.http.middlewares.headscale.headers.accesscontrolalloworiginlist=https://hs-ui.doctest.duckdns.org"
+      - "traefik.http.middlewares.headscale.headers.accesscontrolalloworiginlist=https://hs-ui.${PUBLIC_DOMAIN}"
       - "traefik.http.middlewares.headscale.headers.accesscontrolmaxage=100"
       - "traefik.http.middlewares.headscale.headers.addvaryheader=true"
         #      - traefik.http.routers.homeassistant.tls=true
