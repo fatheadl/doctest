@@ -27,6 +27,8 @@ services:
       TRUSTED_PROXY: 172.19.0.1/12
     networks:
       - ubuntu_fatheadl-net
+    ports:
+      - 8888:80
     labels:
       - traefik.enable=true
       - traefik.http.services.influxdb.loadbalancer.server.port=8086
