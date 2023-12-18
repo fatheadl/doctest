@@ -19,12 +19,12 @@ volumes:
       options:
         max-size: 10m
     volumes:
-      - data:/var/www/FreshRSS/data
-      - extensions:/var/www/FreshRSS/extensions
+      - /opt/freshrss/data:/var/www/FreshRSS/data
+      - /opt/freshrss/extensions:/var/www/FreshRSS/extensions
     environment:
       TZ: America/Jamaica
       CRON_MIN: '3,33'
-      TRUSTED_PROXY: 172.16.0.1/12 192.168.0.1/16
+      TRUSTED_PROXY: 172.19.0.1/12
     networks:
       - ubuntu_fatheadl-net
     labels:
