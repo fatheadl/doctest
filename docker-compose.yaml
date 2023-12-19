@@ -24,18 +24,18 @@ services:
     environment:
       TZ: America/Jamaica
       CRON_MIN: '3,33'
-      TRUSTED_PROXY: 172.19.0.1/12
+      TRUSTED_PROXY: 172.19.0.3/12
     networks:
       - ubuntu_fatheadl-net
     ports:
       - 8888:80
     labels:
       - traefik.enable=true
-      - traefik.http.services.influxdb.loadbalancer.server.port=8086
-      - traefik.http.routers.influxdb.rule=Host(`rss.${PUBLIC_DOMAIN}`)
-      - traefik.http.routers.influxdb.entrypoints=websecure
+      - traefik.http.services.freshrss.loadbalancer.server.port=80
+      - traefik.http.routers.freshrss.rule=Host(`rss.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.freshrss.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
-      - traefik.http.routers.influxdb.tls.certresolver=le
+      - traefik.http.routers.freshrss.tls.certresolver=le
       - traefik.docker.network=ubuntu_fatheadl-net      
 
   influxdb:
