@@ -22,6 +22,8 @@ services:
       - /opt/freshrss/data:/var/www/FreshRSS/data
       - /opt/freshrss/extensions:/var/www/FreshRSS/extensions
     environment:
+      ADMIN_PASSWORD: freshrss
+      ADMIN_API_PASSWORD: freshrss
       TZ: America/Jamaica
       CRON_MIN: '3,33'
       TRUSTED_PROXY: 172.19.0.3/12
