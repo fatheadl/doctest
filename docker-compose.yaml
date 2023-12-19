@@ -33,8 +33,15 @@ services:
       - 8888:80
     labels:
       - traefik.enable=true
+      - traefik.http.middlewares.freshrssM1.compress=true
+      - traefik.http.middlewares.freshrssM2.headers.browserXssFilter=true
+      - traefik.http.middlewares.freshrssM2.headers.forceSTSHeader=true
+      - traefik.http.middlewares.freshrssM2.headers.frameDeny=true
+      - traefik.http.middlewares.freshrssM2.headers.referrerPolicy=no-referrer-when-downgrade
+      - traefik.http.middlewares.freshrssM2.headers.stsSeconds=31536000      
       - traefik.http.services.freshrss.loadbalancer.server.port=80
       - traefik.http.routers.freshrss.rule=Host(`rss.${PUBLIC_DOMAIN}`)
+      - traefik.http.routers.freshrss.middlewares=freshrssM1,freshrssM2      
       - traefik.http.routers.freshrss.entrypoints=websecure
         #      - traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.freshrss.tls.certresolver=le
