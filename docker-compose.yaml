@@ -303,7 +303,7 @@ services:
 #      - traefik.docker.network=fatheadl-net
 #      
   gitea:
-    image: gitea/gitea:1.21.2
+    image: gitea/gitea:1.21.3
     container_name: gitea
     environment:
       - USER_UID=1000
