@@ -165,7 +165,7 @@ services:
 #    environment:
     #      - SET_CONTAINER_TIMEZONE=true
     #      - CONTAINER_TIMEZONE=${TIMEZONE}
-      - TZ=${TIMEZONE}
+#      - TZ=${TIMEZONE}
 #    volumes:
 #      - "/opt/node-red:/data"
 #    user: "0"
