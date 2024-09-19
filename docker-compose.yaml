@@ -88,7 +88,7 @@ services:
         - 8081:8080
         - 9090:9090
     image: headscale/headscale:0.23
-    command: headscale serve
+    command: serve
     restart: unless-stopped
     networks:
       - ubuntu_fatheadl-net    
