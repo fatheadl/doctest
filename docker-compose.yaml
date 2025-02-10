@@ -87,7 +87,7 @@ services:
     ports:
         - 8081:8080
         - 9090:9090
-    image: headscale/headscale:v0.23
+    image: headscale/headscale:v0.24
     command: serve
     restart: unless-stopped
     networks:
