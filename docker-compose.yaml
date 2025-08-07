@@ -335,7 +335,7 @@ services:
     environment:
       WEBSOCKET_ENABLED: "true"  # Enable WebSocket notifications.
     ports:
-      - "8080:80"
+      - "8082:80"
       - "3012:3012"
     networks:
       - ubuntu_fatheadl-net      
