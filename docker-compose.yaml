@@ -80,7 +80,7 @@ services:
   headscale:
     container_name: headscale
     volumes:
-        - /opt/headscale/config:/etc/headscale/
+        - /opt/headscale/config:/etc/headscale/:ro
         - /opt/headscale/keys:/var/lib/headscale/
     environment:
       - TZ=America/Jamaica        
@@ -88,6 +88,9 @@ services:
         - 8081:8080
         - 9090:9090
     image: headscale/headscale:v0.28
+    read_only: true
+    tmpfs:
+      - /var/run/headscale    
     command: serve
     restart: unless-stopped
     networks:
@@ -103,7 +106,9 @@ services:
       #- "traefik.http.middlewares.headscale.headers.addvaryheader=true"
       #- traefik.http.routers.homeassistant.tls=true
       - traefik.http.routers.headscale.tls.certresolver=le
-      - traefik.docker.network=ubuntu_fatheadl-net    
+      - traefik.docker.network=ubuntu_fatheadl-net
+    healthcheck:
+      test: ["CMD", "headscale", "health"]      
 
   headscale-ui:
     image: ghcr.io/gurucomputing/headscale-ui:latest
